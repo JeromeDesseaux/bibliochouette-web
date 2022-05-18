@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project URLs 
+
+The project is automatically deployed and can be used on Netlify thourgh [this url](https://meek-horse-79cec6.netlify.app/)
+
+Be careful that this address *IS ONLY USED FOR TESTING PURPOSES*. The official production URL is not currently known and will be provided whenever the project's ready to be used. 
+
+Thanks for your patience.
+
 ## Available Scripts
 
 In the project directory, you can run:
