@@ -182,7 +182,7 @@ const Menu = (props) => {
 };
 
 Menu.propTypes = {
-    children: PropTypes.optionalNode,
+    children: PropTypes.any,
     title: PropTypes.string
 };
 

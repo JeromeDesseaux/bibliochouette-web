@@ -31,11 +31,10 @@ const AuthProvider = ({ children }) => {
 };
 
 AuthProvider.propTypes = {
-    children: PropTypes.optionalNode
+    children: PropTypes.any
 };
 
 const ProtectedRoute = ({ children }) => {
-    console.log(isLoggedIn());
     if (!isLoggedIn()) {
         return <Navigate to="/login" replace />;
     }
@@ -44,7 +43,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 ProtectedRoute.propTypes = {
-    children: PropTypes.optionalNode
+    children: PropTypes.any
 };
 
-export { AuthContext, ProtectedRoute };
+export { AuthContext, AuthProvider, ProtectedRoute };
