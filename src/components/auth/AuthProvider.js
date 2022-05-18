@@ -1,28 +1,33 @@
 import React from 'react';
-import { isLoggedIn, login, logout } from '../../services/auth';
 import PropTypes from 'prop-types';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from '@firebase/auth';
+import { auth } from '../firebase/firebaseFunctions';
+import { useLocalStorage } from '../../hooks/localStorage.hooks';
 
 const AuthContext = React.createContext(null);
 
 const AuthProvider = ({ children }) => {
-    const [token, setToken] = React.useState(null);
+    const [user, setUser] = useLocalStorage('user', null);
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        const token = await login();
-        setToken(token);
-        navigate('/');
+    const handleLogin = async (login, password) => {
+        try {
+            const user = await signInWithEmailAndPassword(auth, login, password);
+            setUser(user);
+            navigate('/');
+        } catch (error) {
+            throw new Error();
+        }
     };
 
     const handleLogout = () => {
-        logout();
-        setToken(null);
+        setUser(null);
         navigate('/login');
     };
 
     const value = {
-        token,
+        user,
         onLogin: handleLogin,
         onLogout: handleLogout
     };
@@ -35,7 +40,11 @@ AuthProvider.propTypes = {
 };
 
 const ProtectedRoute = ({ children }) => {
-    if (!isLoggedIn()) {
+    const authContext = React.useContext(AuthContext);
+
+    console.log('Current logged in user', authContext.user);
+
+    if (!authContext.user) {
         return <Navigate to="/login" replace />;
     }
 

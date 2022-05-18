@@ -1,0 +1,11 @@
+const firebaseConfig = {
+    apiKey: 'AIzaSyA-qYJ0KfrfORlgoiCZ5LWE2gHecCf1ms0',
+    authDomain: 'bibliochouette-7568c.firebaseapp.com',
+    databaseURL: 'https://bibliochouette-7568c.firebaseio.com',
+    projectId: 'bibliochouette-7568c',
+    storageBucket: 'bibliochouette-7568c.appspot.com',
+    messagingSenderId: '554944219261',
+    appId: '1:554944219261:web:c9251ce63fee21782e0914'
+};
+
+export { firebaseConfig };

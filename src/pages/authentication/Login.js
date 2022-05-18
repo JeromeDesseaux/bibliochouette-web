@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import { AuthContext } from '../../components/auth/AuthProvider';
 
@@ -21,12 +21,43 @@ const VerticalForm = styled.form`
 function Login() {
     const auth = React.useContext(AuthContext);
 
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [hasError, setError] = React.useState(false);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await auth.onLogin(username, password);
+        } catch (error) {
+            setError(true);
+        }
+    };
+
     return (
         <CenteredDiv>
-            <VerticalForm>
-                <TextField variant="outlined" placeholder="caroline.dupond@ac-paris.fr" />
-                <TextField variant="outlined" type="password" placeholder="mot de passe" />
-                <Button variant="contained" onClick={() => auth.onLogin()}>
+            <VerticalForm onSubmit={onSubmit}>
+                <TextField
+                    variant="outlined"
+                    placeholder="caroline.dupond@ac-paris.fr"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    type="password"
+                    placeholder="mot de passe"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {hasError ? (
+                    <Typography variant="caption" color="error">
+                        Email ou mot de passe invalide.
+                    </Typography>
+                ) : (
+                    ''
+                )}
+                <Button variant="contained" type="submit">
                     Se connecter
                 </Button>
             </VerticalForm>
