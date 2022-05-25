@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../firebase/firebaseFunctions';
 import { useLocalStorage } from '../../hooks/localStorage.hooks';
+import Menu from '../navigation/sidenav';
 
 const AuthContext = React.createContext(null);
 
@@ -13,8 +14,8 @@ const AuthProvider = ({ children }) => {
 
     const handleLogin = async (login, password) => {
         try {
-            const user = await signInWithEmailAndPassword(auth, login, password);
-            setUser(user);
+            const userResponse = await signInWithEmailAndPassword(auth, login, password);
+            setUser(userResponse.user);
             navigate('/');
         } catch (error) {
             throw new Error();
@@ -42,13 +43,11 @@ AuthProvider.propTypes = {
 const ProtectedRoute = ({ children }) => {
     const authContext = React.useContext(AuthContext);
 
-    console.log('Current logged in user', authContext.user);
-
     if (!authContext.user) {
         return <Navigate to="/login" replace />;
     }
 
-    return children;
+    return <Menu title="Bibliochouette">{children}</Menu>;
 };
 
 ProtectedRoute.propTypes = {
