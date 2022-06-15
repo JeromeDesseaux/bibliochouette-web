@@ -20,7 +20,7 @@ import ListItemText from '@mui/material/ListItemText';
 import PropTypes from 'prop-types';
 import { AuthContext } from '../auth/AuthProvider';
 import { Button } from '@mui/material';
-import { House, MenuBook, Person } from '@mui/icons-material';
+import { CreditScore, House, MenuBook, Person } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -195,6 +195,24 @@ const Menu = (props) => {
                                 <House />
                             </ListItemIcon>
                             <ListItemText primary="Classes" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} component={Link} to="/loans">
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5
+                            }}>
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center'
+                                }}>
+                                <CreditScore />
+                            </ListItemIcon>
+                            <ListItemText primary="Emprunts" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
                 </List>

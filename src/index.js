@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import Router from './Router';
 import { AuthProvider } from './components/auth/AuthProvider';
 import { BookProvider } from './contexts/BookContext';
+import { ClassProvider } from './contexts/ClassContext';
+import { LoanProvider } from './contexts/LoanContext';
+import { PupilProvider } from './contexts/PupilContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,9 +16,15 @@ root.render(
     <BrowserRouter>
         <AuthProvider>
             <BookProvider>
-                <React.StrictMode>
-                    <Router />
-                </React.StrictMode>
+                <ClassProvider>
+                    <LoanProvider>
+                        <PupilProvider>
+                            <React.StrictMode>
+                                <Router />
+                            </React.StrictMode>
+                        </PupilProvider>
+                    </LoanProvider>
+                </ClassProvider>
             </BookProvider>
         </AuthProvider>
     </BrowserRouter>

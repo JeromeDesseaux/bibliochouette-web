@@ -32,9 +32,10 @@ const LibraryList = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            console.log('hello 1');
-            const books = await bookContext.getAllBooks(authContext.user.uid);
-            console.log('hello 2', books);
+            const books = await bookContext.getBooks(authContext.user.uid);
+            // pupilsContext.getPupils();
+            // loanContext.getLoans();
+            // classContext.getClasses();
             setBooks(books);
             setLoading(false);
         };

@@ -18,7 +18,7 @@ const BookProvider = ({ children }) => {
         return books;
     };
 
-    const getAllBooks = async (userId) => {
+    const getBooks = async (userId) => {
         const dbRef = ref(database, `books`);
         const snapshot = await get(child(dbRef, `/${userId}`));
         const dbBooks = flatten(snapshot.val());
@@ -30,7 +30,7 @@ const BookProvider = ({ children }) => {
         books,
         getBookByUID,
         addBook,
-        getAllBooks
+        getBooks
     };
 
     return <BookContext.Provider value={value}>{children}</BookContext.Provider>;
